@@ -1,6 +1,6 @@
 # Image Generator
 
-A simple personal image generator app based on Replicate, intended for local use.
+A simple personal image generator web app based on Replicate, intended for local use.
 
 **Note**
 
