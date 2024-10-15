@@ -1,0 +1,48 @@
+models:
+  flux-schnell:
+    model: black-forest-labs/flux-schnell
+    max_width: 2048
+  juggernaught:
+    model: lucataco/juggernaut-xl-v9
+    max_width: 1280
+  playground:
+    model: playgroundai/playground-v2.5-1024px-aesthetic
+    max_width: 1536
+  sdxl:
+    model: stability-ai/sdxl
+    max_width: 1024
+  sd3:
+    model: stability-ai/stable-diffusion-3
+    max_width: 1344
+  proteus:
+    model: datacte/proteus-v0.4-lightning
+    max_width: 1024
+  # dreamshaper:
+  #   model: lucataco/dreamshaper-xl-lightning
+  #   max_width: 1280
+  sdxl-cinematic:
+    model: martintmv-git/sdxl-cinematic
+    max_width: 1280
+  sdxl-lightning:
+    model: bytedance/sdxl-lightning-4step
+    max_width: 1280
+  flux-red-cinema:
+    model: halimalrasihi/flux-red-cinema
+    max_width: 1440
+    trigger: r3dcma
+  flux-ghibsky-illustration:
+    model: aleksa-codes/flux-ghibsky-illustration
+    max_width: 1440
+    trigger: GHIBSKY
+  flux-neon-tokyo:
+    model: levelsio/neon-tokyo
+    max_width: 1440
+    trigger: TKYO
+  flux-aesthetic-anime:
+    model: datacte/flux-aesthetic-anime
+    max_width: 1440
+    trigger: syntheticanim
+    disable_face_fixer: true
+  flux-1.1-pro:
+    model: black-forest-labs/flux-1.1-pro
+    max_width: 1440

@@ -1,0 +1,209 @@
+    body {
+      padding: 5px;
+    }
+
+    #result > div:first-child img {
+      max-width: 100%;
+      width: 100%;
+      height: auto;
+    }
+
+    #result > div:first-child.zoomed {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    #result div img {
+      height: 350px;
+      width: 350px;
+      border: 3px solid darkgray;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    #result > div:first-child {
+      width: 60%;
+      margin: 0 20% 0 20%;
+    }
+
+    #result > div {
+      display: inline-block;
+      position: relative;
+      margin: 5px;
+      width: 375px;
+      padding: auto;
+    }
+
+    #result {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: auto;
+    }
+
+    #result div img:hover {
+      cursor: pointer;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .controls button {
+      margin: 0 10px 0 10px;
+    }
+
+    .zoomed .controls {
+      position: fixed;
+      bottom: 5px;
+    }
+
+    button.next-btn, button.previous-btn {
+      display: none;
+    } 
+
+    .zoomed button.next-btn, .zoomed button.previous-btn {
+      display: block;
+    } 
+
+    #result div.zoomed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1000;
+      border: none;
+      background-color: rgba(0.1, 0.1, 0.1, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #result div.zoomed img {
+      object-fit: contain;
+      width: fit-content;
+      margin: auto;
+      height: fit-content;
+      max-width: 100vw;
+      max-height: 80vh;
+      border: 3px solid darkgray;
+    }
+
+    #result div.zoomed > div{
+      position: fixed;
+      width: auto;
+      display: flex;
+      align-items: center;
+
+    }
+
+    #result div.zoomed .prompt{
+      top: 5px;
+      display: block;
+      width: 80vh;
+      text-align: center;
+      max-height: 10vh;
+      color: white;
+      margin: 5px;
+      overflow: scroll;
+    }
+
+    #result div .prompt {
+      font-size: 0.5rem;
+      display: none;
+      color: white;
+      margin: 5px;
+    }
+
+    .proxy {
+      position: relative;
+      margin: 0 auto 75px auto;
+      width: 350px;
+      height: 350px;
+      border: 3px solid darkgray;
+      border-radius: 10px;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .bg-animated {
+      background: linear-gradient(270deg, #e9e9e9, #320dbb, #cc1212);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+    }
+
+    div.proxy p.prompt {
+      display: inline !important;
+    }
+
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .dimensions, .model {
+      display: block;
+      font-size: x-small;
+      color: gray;
+      width: 110px;
+      overflow: hidden;
+    }
+
+    /* from: https://blog.hubspot.com/website/css-loading-animation */
+    .ripple {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      translate: 50% 50%;
+    }
+
+    .ripple::before,
+    .ripple::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 4px solid #FF5C35;
+      opacity: 0;
+      animation: ripple 3s infinite;
+    }
+
+    .ripple::after {
+      animation-delay: 1.5s;
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+        border: 4px solid #35ff89;
+      }
+
+      25% {
+        opacity: 1;
+        border: 4px solid #FF5C35;
+      }
+
+      100% {
+        transform: scale(2.5);
+        opacity: 0;
+        border: 4px solid #7c35ff;
+      }
+    }
+
+    .delete-btn {
+      display: block;
+    }
