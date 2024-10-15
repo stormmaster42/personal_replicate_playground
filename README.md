@@ -17,7 +17,7 @@ Does not include authentication - do not run in the cloud!
 
 * Always generates highest resolution
 * Upscales and applies face fixing
-* Choose aspect ratio 1:1, 16:0, 9:16
+* Choose aspect ratio 1:1, 16:9, 9:16
 * One click prompt enhancement (using replicate llama)
 
 **Installation**
@@ -32,6 +32,6 @@ Does not include authentication - do not run in the cloud!
 
 **About**
 
-* Deliberately using simple tech - Ruby, Sinatra, and Docker - to keep things easy to understand and maintain.
+* Deliberately using simple tech - Ruby, Sinatra, and Docker - to keep things easy to understand and maintainable.
 * This app is not intended for production use, but rather as a personal image generator for local use.
 * Use at your own risk.
