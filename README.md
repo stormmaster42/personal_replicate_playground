@@ -2,10 +2,12 @@
 
 A simple personal image generator web app based on Replicate, intended for local use.
 
+![image](https://github.com/user-attachments/assets/88108bde-d69e-46c0-853d-306ee3bf5c0f)
+
 **Note**
 
 A replicate.com account is required.
-Does not include authentication - do not run in the cloud!
+It does not include authentication - do not run in the cloud!
 
 **Why?**
 
@@ -15,10 +17,10 @@ Does not include authentication - do not run in the cloud!
 
 **Features & Opinionated Settings**
 
-* Always generates highest resolution
-* Upscales and applies face fixing
+* Always generates the highest resolution
+* Upscales and applies face-fixing
 * Choose aspect ratio 1:1, 16:9, 9:16
-* One click prompt enhancement (using replicate llama)
+* One-click prompt enhancement (using replicate llama)
 
 **Installation**
 
@@ -28,7 +30,7 @@ Does not include authentication - do not run in the cloud!
 4. Run the Docker container: `docker run -v ./cache:/app/cache -e REPLICATE_API_TOKEN --name image_gen -d -p 8080:8080 image_gen`
 
 **Details**
-* `./cache` is the folder where the app stores images and meta data (in a json file for now)
+* `./cache` is the folder where the app stores images and metadata (in a JSON file for now)
 
 **About**
 
