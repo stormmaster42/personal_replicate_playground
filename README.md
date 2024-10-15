@@ -1,4 +1,4 @@
-# Image Generator
+# Personal Replicate Image Generation Playground
 
 A simple personal image generator web app based on Replicate, intended for local use.
 
