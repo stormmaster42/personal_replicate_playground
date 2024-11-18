@@ -9,10 +9,9 @@ gemfile do
   gem 'http'
   gem 'json'
   gem 'rackup'
-  gem 'webrick'
+  gem 'thin'
 end
 
-require 'webrick'
 require 'sinatra'
 require 'http'
 require 'json'
