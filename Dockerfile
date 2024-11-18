@@ -1,5 +1,5 @@
 # Use the official Ruby image from the Docker Hub
-FROM ruby:3.1
+FROM ruby:3.3
 
 # Set the working directory in the container
 WORKDIR /app

@@ -8,10 +8,10 @@ gemfile do
   gem 'sinatra'
   gem 'http'
   gem 'json'
-  gem 'rackup'
   gem 'thin'
 end
 
+require 'thin'
 require 'sinatra'
 require 'http'
 require 'json'
