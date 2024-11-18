@@ -25,7 +25,7 @@ It does not include authentication - do not run in the cloud!
 **Installation**
 
 1. Clone the repo
-2. Build the Docker image: `docker build .`
+2. Build the Docker image: `docker build -t image_gen .`
 3. Set the Replicate API token as an environment variable: `export REPLICATE_API_TOKEN=<replicate key: r8_.....>`
 4. Run the Docker container: `docker run -v ./cache:/app/cache -e REPLICATE_API_TOKEN --name image_gen -d -p 8080:8080 image_gen`
 

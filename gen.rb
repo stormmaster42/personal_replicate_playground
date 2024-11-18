@@ -11,7 +11,6 @@ gemfile do
   gem 'thin'
 end
 
-require 'thin'
 require 'sinatra'
 require 'http'
 require 'json'
