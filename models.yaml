@@ -2,6 +2,19 @@ models:
   flux-schnell:
     model: black-forest-labs/flux-schnell
     max_width: 2048
+  flux-1.1-pro:
+    model: black-forest-labs/flux-1.1-pro
+    max_width: 1440
+  flux-1.1-pro-ultra:
+    model: black-forest-labs/flux-1.1-pro-ultra
+    max_width: 2560
+    upscale: false
+    options:
+      safety_tolerance: 6
+  recraft-v3:
+    model: recraft-ai/recraft-v3
+    max_width: 1820
+    upscale: false
   juggernaught:
     model: lucataco/juggernaut-xl-v9
     max_width: 1280
@@ -43,6 +56,3 @@ models:
     max_width: 1440
     trigger: syntheticanim
     disable_face_fixer: true
-  flux-1.1-pro:
-    model: black-forest-labs/flux-1.1-pro
-    max_width: 1440

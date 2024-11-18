@@ -17,6 +17,7 @@ require 'json'
 require 'digest'
 require 'fileutils'
 require 'cgi'
+require 'yaml'
 
 # Set the desired port number
 set :port, 8080 # Change this to the port number you want
@@ -30,10 +31,10 @@ if REPLICATE_API_TOKEN.nil? || REPLICATE_API_TOKEN.empty?
   abort('Error: REPLICATE_API_TOKEN environment variable is not set.')
 end
 
-MODELS = YAML.load_file('models.yml')
+MODELS = YAML.load_file(File.join(__dir__, 'models.yaml'), symbolize_names: true)[:models]
 
 # Directory where images will be cached
-CACHE_DIR = './cache'
+CACHE_DIR = File.join(__dir__, 'cache')
 FileUtils.mkdir_p(CACHE_DIR) unless Dir.exist?(CACHE_DIR)
 
 # Filepath for the metadata file
@@ -52,7 +53,7 @@ end
 # Function to save metadata to file
 def save_metadata
   # TODO: ensure only one writer: with lock
-  lock = File.open("#{METADATA_FILE}.lock", File::CREAT) do |f|
+  File.open("#{METADATA_FILE}.lock", File::CREAT) do |f|
     f.flock(File::LOCK_EX)
 
     File.open(METADATA_FILE, 'w') do |f|
@@ -116,7 +117,7 @@ def get_latest_model_version_id!(model_name)
     model_info['latest_version']['id']
 
   else
-    halt 500, { "error": 'Failed to retrieve model version' }.to_json
+    halt 500, { "error": "Failed to retrieve model version for #{model_name}." }.to_json
   end
 end
 
@@ -154,9 +155,9 @@ end
 def dimension(aspect_ratio, longest_side = 2048)
   width, height = aspect_ratio.split(':').map(&:to_f)
   if width > height
-    [longest_side, (longest_side * height / width).to_i]
+    [longest_side, (longest_side * height / width).round]
   else
-    [(longest_side * width / height).to_i, longest_side]
+    [(longest_side * width / height).round, longest_side]
   end
 end
 
@@ -187,6 +188,8 @@ post '/generate' do
     trigger = model[:trigger]
     dimension = dimension(params[:aspect_ratio], model[:max_width])
     prompt_and_trigger = trigger ? "#{prompt}; in the style of #{trigger}" : prompt
+    input = {}
+    input.merge!(model[:options]) if model[:options]
     input = {
       prompt: prompt_and_trigger,
       negative_prompt:,
@@ -194,6 +197,7 @@ post '/generate' do
       width: dimension[0],
       height: dimension[1],
       aspect_ratio: params[:aspect_ratio],
+      size: "#{dimension[0]}x#{dimension[1]}",
       apply_watermark: false,
       # seed: 9586464,
       refiner: 'expert_ensemble_refiner'
@@ -203,18 +207,22 @@ post '/generate' do
     data[:prediction] = result
   end
 
-  post_process_model = model[:disable_face_fixer] ? 'nightmareai/real-esrgan' : 'sczhou/codeformer'
-  version = get_latest_model_version_id(post_process_model)
-  image = result['output'].is_a?(Array) ? result['output'].first : result['output']
-  input = {
-    image:,
-    upscale: 2,
-    scale: 2
-  }
-  face_fix_result = start_and_get_result(input, version, image_filename)
-  data[:face_fix_result] = face_fix_result['logs']
-  data[:upscaled] = true
-
+  data[:upscaled] =
+    if model[:upscale] == false
+      false
+    else
+      post_process_model = model[:disable_face_fixer] ? 'nightmareai/real-esrgan' : 'sczhou/codeformer'
+      version = get_latest_model_version_id(post_process_model)
+      image = result['output'].is_a?(Array) ? result['output'].first : result['output']
+      input = {
+        image:,
+        upscale: 2,
+        scale: 2
+      }
+      face_fix_result = start_and_get_result(input, version, image_filename)
+      data[:face_fix_result] = face_fix_result['logs']
+      true
+    end
   basename = File.basename(image_filename)
 
   # Update metadata with the new image and prompt
